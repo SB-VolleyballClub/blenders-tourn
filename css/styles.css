@@ -20,6 +20,15 @@ form {
 div#msg {
     background-color: green;
 }
+.poolgrid-container {
+    display: inline;
+}
+.teams-container {
+    display: inline;
+}
+/* .pool-container {
+    display: inline;
+} */
 #content-wrapper {
     border-radius: 12px;
     border: 3px solid blue;
@@ -34,4 +43,20 @@ div#msg {
     border-radius: 6px;
     border: 1px solid red;
     padding: 10px;
+    display: flex;
+}
+.pool-container-left {
+    float: left;
+    width: 40%;
+    border-radius: 6px;
+    border: 1px solid magenta;
+    padding: 5px;
+    overflow: hidden;
+}
+.pool-container-right {
+    width: 60%;
+    border-radius: 6px;
+    border: 1px solid yellow;
+    padding: 5px;
+    overflow: hidden;
 }

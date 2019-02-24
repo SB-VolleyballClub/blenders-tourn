@@ -4,6 +4,10 @@ require_once('./inc/tourn.class.php');
 if (isset($_GET['mode']) &&  $_GET['mode'] == 'reset'){
     unset($_SESSION['tourn']);
 }
+$render = true;
+if (isset($_GET['norender'])){
+    $render = false;
+}
 // print "<hr><pre>";
 // print_r($_SESSION);
 // print "</pre><hr>";
@@ -22,6 +26,6 @@ else{
 //print ($newTourn) ? "New" : "Session";
 $tourn->processGet();
 
-print $tourn->html();
+if ($render) print $tourn->render();
 $_SESSION['tourn'] = serialize($tourn);
 ?>
