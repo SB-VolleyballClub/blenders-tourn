@@ -5,8 +5,12 @@ if (isset($_GET['mode']) &&  $_GET['mode'] == 'reset'){
     unset($_SESSION['tourn']);
 }
 $render = true;
+$GLOBALS['render-data'] = true;
 if (isset($_GET['norender'])){
     $render = false;
+}
+if (isset($_GET['norenderdata'])){
+    $GLOBALS['render-data'] = false;
 }
 // print "<hr><pre>";
 // print_r($_SESSION);
@@ -16,11 +20,11 @@ if (isset($_SESSION['tourn'])){
     //print "Unserialize<br>";
     $tourn = unserialize($_SESSION['tourn']);
     $tourn->incrementCounter();
-    $newTourn = false;
+    //$newTourn = false;
 }
 else{
     $tourn = new tourn();
-    $newTourn = true;
+    //$newTourn = true;
 }
 
 //print ($newTourn) ? "New" : "Session";

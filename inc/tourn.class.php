@@ -46,13 +46,13 @@ class poolLayout {
 class team {
     public static function tableHeader(){
         $b = '';
-        $b .= '<tr>';
+        $b .= '<tr class="tableHeader">';
         $b .= '<td>#</td>';
-        $b .= '<td>Name</td>';
-        $b .= '<td>W</td>';
-        $b .= '<td>L</td>';
-        $b .= '<td>% W:L</td>';
-        $b .= '<td>Stat</td>';
+        $b .= '<td class="name">Name</td>';
+        $b .= '<td class="wins">W</td>';
+        $b .= '<td class="losses">L</td>';
+        $b .= '<td class="ratio">% W:L</td>';
+        $b .= '<td class="status">Games</td>';
         $b .= '</tr>';
         return $b;
     }
@@ -165,8 +165,13 @@ class pool {
                 //$this->checkScore($match['score-g'.$g.'t0'],$match['score-g'.$g.'t1']);
 
                 if ($match['score-g'.$g.'t0'] == 0 && $match['score-g'.$g.'t1'] == 0){
-                    $status[$t1index] .= 'z';
-                    $status[$t2index] .= 'z';
+                    $status[$t1index] .= '-';
+                    $status[$t2index] .= '-';
+                }
+                // Check to see if max score is > allowed && difference > 2
+                elseif((abs($match['score-g'.$g.'t0'] - $match['score-g'.$g.'t1']) > 2) && (($match['score-g'.$g.'t0'] > $maxpts) || ($match['score-g'.$g.'t1'] > $maxpts)) ){
+                    $status[$t1index] .= 'E';
+                    $status[$t2index] .= 'E';
                 }
                 elseif ($match['score-g'.$g.'t0'] > $match['score-g'.$g.'t1']){
                     if ($match['score-g'.$g.'t0'] >= $maxpts){
@@ -328,28 +333,29 @@ class tourn {
         $this->counter = 0;
         $this->sorted = array();
         $this->pools = array();
-        $this->botBuf = '';
+        $this->bufExport = '';
     }
     function __sleep(){
         return array('pools','sorted');
     }
     function __wakeup(){
+        $this->updateWinLoss();
         $this->sortResults();
     }
     function incrementCounter(){
         $this->counter++;
     }
     function render(){
-        $this->buf = '';
-        $this->render_top();
-        $this->render_content();
-        $this->render_bottom();
+        $b = '';
+        $b .= $this->render_top();
+        $b .= $this->render_content();
+        $b .= $this->render_bottom();
 
-        return $this->buf;
+        return $b;
     }
     function render_top(){
-        $this->buf .= '<!doctype html>';
-        $this->buf .= '
+        $b = '<!doctype html>';
+        $b .= '
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -358,58 +364,75 @@ class tourn {
     <meta name="description" content="Blenders Tournament">
     <meta name="author" content="Aaron Martin">
 
-    <link rel="stylesheet" href="./css/styles.css?v=1.0">
+    <link rel="stylesheet" href="./css/styles.css?v=1.1">
 </head>
 <body>
     <script src="js/scripts.js"></script>
     <div id="msg"></div>
     <div id="content-wrapper">
 ';
+        return $b;
 
     }
+    function render_top_nav(){
+        $b = '
+    <a href="?mode=reset" class="reset-button">Clear All</a>
+    <a href="?mode=addPool" class="add-pool-button">+ Pool</a>
+    <a href="?mode=help" class="add-pool-button">Help</a>
+    <a href="?mode=reload" class="reload-button">Reload</a>
+';
+        return $b;
+    }
     function render_bottom(){
-        $this->buf .= '    </div> <!-- end content-wrapper -->
+        return '    </div> <!-- end content-wrapper -->
 </body>
 </html>';
     }
     function render_pools(){
-        $this->buf .= '<div class="pools-container">';
+        $b = '';
+        $b .= '<div class="pools-container">';
         //$this->buf .= 'Pools Container: ' . count($this->pools);
         foreach($this->pools as $pool){
-            $this->buf .= $pool->render();
+            $b .= $pool->render();
         }
-        $this->buf .= '</div> <!-- end pools-container div -->';
+        $b .= '</div> <!-- end pools-container div -->';
+        return $b;
     }
     function render_sorted(){
-        $this->buf .= '<div id="teams-sorted">';
+        if (count($this->sorted) == 0) return '';
+        $b = '';
+        $b .= '<div id="teams-sorted">';
         //$this->buf .= "Teams - Sorted<br>\n";
-        $this->buf .= '<table id="teams-sorted">';
+        $b .= '<table id="teams-sorted">';
 
-        $this->buf .= team::tableHeader();
+        $b .= team::tableHeader();
         foreach($this->sorted as $st){
-            $this->buf .= $st->render(false);
+            $b .= $st->render(false);
         }
-        $this->buf .= '</table> <!-- end table -->';
-        $this->buf .= '</div> <!-- end teams-sorted div -->';
+        $b .= '</table> <!-- end table -->';
+        $b .= '</div> <!-- end teams-sorted div -->';
+        return $b;
+        //$this->buf .= $b;
     }
-    function render_content(){
-        //$this->buf .= 'Counter: ' . $this->counter;
-        $this->buf .= '
-    <a href="?mode=reset" class="reset-button">Clear All</a>
-    <a href="?mode=addPool" class="add-pool-button">+ Pool</a>
-    <a href="?mode=reload" class="reload-button">Reload</a>
-';
-
-        $this->render_pools();
-        $this->render_sorted();
-        $this->buf .= '
+    function render_data_nav(){
+        return '
         <a href="?mode=testData" class="wide-button">Load Example</a>
         <a href="?mode=demoData" class="wide-button">Load Demo</a>
         <a href="?mode=export" class="add-pool-button">Export</a>
         ';
+    }
+    function render_content(){
+        $b = '';
+        //$this->buf .= 'Counter: ' . $this->counter;
+        $b .= $this->render_top_nav();
 
-        $this->buf .= $this->botBuf;
-        //print $this->botBuf;
+        if ($GLOBALS['render-data']) $b .= $this->render_pools();
+        if ($GLOBALS['render-data']) $b .= $this->render_sorted();
+        if ($GLOBALS['render-data']) $b .= $this->render_data_nav();
+        $b .= $this->render_export();
+        $b .= $this->render_help();
+        //print $this->bufExport;
+        return $b;
     }
     function processGet(){
         //mode=setName&teamid=1&pool=2&name="Hey There"
@@ -444,10 +467,65 @@ class tourn {
             if ($mode == 'export'){
                 $this->export();
             }
+            if ($mode == 'help'){
+                $this->help();
+            }
         }
     }
+    function help(){
+        $GLOBALS['render-data'] = false;
+        $b = '';
+        $b .= '<section id="help">';
+        $b .= '<h2>Help Display (incomplete, but being improved!)</h2>';
+        $b .= '<p>This display consists of a number of discrete sections/panels.</p>
+        <h3>General Controls</h3>
+        Clear All - This button re-initializes all data, removing any pools, teams that have been entered.<br>
+        + Pool - Add a pool to the Pools Display Section.<br>
+        Help - Switch to the Help display.  The Pools Display is not rendered, but the data is maintained. <br>
+        Reload - Re-Renders the data sections/panels.<br>
+        <h3>Pools Data Display</h3>
+        <p>This area displays any pools created.  On the left is the teams table.  Allowing the user to add teams and set their names for convenience and readability.
+        If the number of teams matches one of the pool match layouts (match layouts currently defined for 3,4,5 teams in a pool) then a scoring
+        grid will be displayed to the right of the teams table.
+        </p>
+
+        <p>Games Status :
+        Each status character of this field corresponds to one of the games that team played.
+        (ie: the 3rd character represents the status of the 3rd game played by that team).
+        Additionally the text is colored according to the overall state of completness.
+        If its colored <span class="incomplete">RED</span>, the games have not been completed, or there are some sort of entry errors.
+        If it is colored <span class="complete">GREEN</span>, then all the games have been correctly designated as a Win (W) or Loss (L).
+        <table>
+        <tr><th>Code</th><th>Desc</th></tr>
+        <tr><td>W</td><td>Won Corresponding Game</td></tr>
+        <tr><td>L</td><td>Lost Corresponding Game</td></tr>
+        <tr><td>-</td><td>Game not playes (score 0-0)</td></tr>
+        <tr><td>E</td><td>Score Entry Error - There are some basic score validations done, if any of those fail, this code indicates an invalid score.</td></tr>
+        <tr><td>I</td><td>Incomplete</td></tr>
+        <tr><td>T</td><td>Game Tied - Also usually means some sort of Score Entry Error</td></tr>
+        </table>
+        </p>
+        <h3>Overall Results display</h3>
+        <p>
+        Displays of the overall team standings.  Currently this is sorted only be the Point ratios.
+        </p>
+        <h3>Data Controls</h3>
+        <p>
+        To load in any of the provide example/demo data sets:<br>
+        Hit <em>"Clear All"</em> button<br>
+        Press one of the <em>"Load ... Data"</em> buttons<br>
+        Currently the <em>"Example"</em> set has 3 different sized pools and
+        the <em>"Demo"</em> set shows various scoring errors in a small 3 team pool.
+        </p>
+
+        ';
+        $b .= "</section><!-- end section#export -->\n";
+        $this->bufHelp = $b;
+    }
     function export(){
-        $buf = '<pre>';
+        $buf = '';
+        $buf .= '<section id="export">';
+        $buf .= '<pre>';
         foreach($this->pools as $p => $pool){
             $buf .= "\$this->addPool();\n";
             foreach($pool->teams as $t => $team){
@@ -466,10 +544,33 @@ class tourn {
             }
         }
         $buf .= "</pre>";
-        $this->botBuf = $buf;
+        $buf .= "</section><!-- end section#export -->\n";
+        $this->bufExport = $buf;
+    }
+    function render_export(){
+        return $this->bufExport;
+    }
+    function render_help(){
+        return $this->bufHelp;
     }
     function loadDemoData(){
-
+        $this->addPool();
+        $this->addTeam(1,'Oranges');
+        $this->addTeam(1,'Apples');
+        $this->addTeam(1,'Lemons');
+        $this->setScoreFromElem('p0m0g0t0',25);
+        $this->setScoreFromElem('p0m0g0t1',17);
+        $this->setScoreFromElem('p0m0g1t0',18);
+        $this->setScoreFromElem('p0m0g1t1',25);
+        $this->setScoreFromElem('p0m1g0t0',28);
+        $this->setScoreFromElem('p0m1g0t1',26);
+        $this->setScoreFromElem('p0m1g1t0',18);
+        $this->setScoreFromElem('p0m1g1t1',18);
+        $this->setScoreFromElem('p0m2g0t0',18);
+        $this->setScoreFromElem('p0m2g0t1',27);
+        $this->setScoreFromElem('p0m2g1t0',16);
+        $this->setScoreFromElem('p0m2g1t1',22);
+        $this->__wakeup();
     }
     function loadTestData(){
         $this->addPool();
@@ -563,6 +664,7 @@ class tourn {
         $this->setScoreFromElem('p2m2g0t1',25);
         $this->setScoreFromElem('p2m2g1t0',16);
         $this->setScoreFromElem('p2m2g1t1',25);
+        $this->__wakeup();
     }
     function setTeamName($poolnum,$teamnum,$name){
         print "tourn::setTeamName($poolnum,$teamnum,$name)<br>";
@@ -620,6 +722,11 @@ class tourn {
 
         // This display will basically be a repeat of all the team list display, just merged and sorted
 
+    }
+    function updateWinLoss(){
+        foreach($this->pools as $pool){
+            $pool->updateWinLoss();
+        }
     }
 }
 function my_cmp($a,$b){

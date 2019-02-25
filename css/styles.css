@@ -8,6 +8,10 @@ table {
     border-collapse: collapse;
     border: 1px solid blue;
 }
+h2 {
+    margin: 2px;
+    padding: 2px;
+}
 tr {
     border: 1px solid blue;
 }
@@ -130,4 +134,22 @@ div#msg {
     color: white;
     font-weight: bold;
     text-decoration: none;
+}
+section#help {
+    border-radius: 8px;
+    border: 2px solid green;
+    padding: 4px;
+    margin: 4px;
+}
+section#export {
+    border-radius: 8px;
+    border: 2px solid green;
+    padding: 4px;
+    margin: 4px;
+}
+.wins {
+    width: 20px;
+}
+.losses {
+    width: 20px;
 }
