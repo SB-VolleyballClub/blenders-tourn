@@ -32,17 +32,26 @@ div#msg {
 #content-wrapper {
     border-radius: 12px;
     border: 3px solid blue;
-    padding: 10px;
+    padding: 4px;
+    margin: 4px;
+}
+#teams-sorted {
+    border-radius: 8px;
+    border: 2px solid green;
+    padding: 4px;
+    margin: 4px;
 }
 .pools-container {
     border-radius: 8px;
     border: 2px solid green;
-    padding: 10px;
+    padding: 4px;
+    margin: 4px;
 }
 .pool-container {
     border-radius: 6px;
     border: 1px solid red;
-    padding: 10px;
+    padding: 4px;
+    margin: 4px;
     display: flex;
 }
 .pool-container-left {
@@ -57,6 +66,68 @@ div#msg {
     width: 60%;
     border-radius: 6px;
     border: 1px solid yellow;
-    padding: 5px;
+    padding: 4px;
+    margin: 4px;
     overflow: hidden;
+}
+.complete {
+    color: green;
+}
+.incomplete {
+    color: red;
+}
+.error {
+    color: red;
+}
+.reload-button {
+    display: inline-block;
+    width: 80px;
+    height: 16px;
+    background: #006600;
+    padding: 4px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    border: 2px solid #666666;
+    text-decoration: none;
+}
+.reset-button {
+    display: inline-block;
+    width: 80px;
+    height: 16px;
+    background: #dd0000;
+    padding: 4px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    border: 2px solid #666666;
+    text-decoration: none;
+}
+.add-pool-button {
+    display: inline-block;
+    width: 80px;
+    height: 16px;
+    background: #4E9CAF;
+    padding: 4px;
+    text-align: center;
+    border-radius: 5px;
+    border: 2px solid #666666;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+.wide-button {
+    display: inline-block;
+    width: 120px;
+    height: 16px;
+    background: #4E9CAF;
+    padding: 4px;
+    text-align: center;
+    border-radius: 5px;
+    border: 2px solid #666666;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
 }
