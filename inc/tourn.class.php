@@ -360,7 +360,7 @@ class tourn {
 <head>
     <meta charset="utf-8">
 
-    <title>The HTML5 Herald</title>
+    <title>SBVC Blenders Tournament Utility</title>
     <meta name="description" content="Blenders Tournament">
     <meta name="author" content="Aaron Martin">
 
