@@ -364,10 +364,10 @@ class tourn {
     <meta name="description" content="Blenders Tournament">
     <meta name="author" content="Aaron Martin">
 
-    <link rel="stylesheet" href="./css/styles.css?v=1.3">
+    <link rel="stylesheet" href="./css/styles.css?v=1.4">
 </head>
 <body>
-    <script src="js/scripts.js"></script>
+    <script src="js/scripts.js?v=1.5"></script>
     <div id="msg">Status Message</div>
     <div id="content-wrapper">
 ';
@@ -380,6 +380,7 @@ class tourn {
     <a href="?mode=addPool" class="add-pool-button">+ Pool</a>
     <a href="?mode=help" class="add-pool-button">Help</a>
     <a href="?mode=reload" class="reload-button">Reload</a>
+    <div id="reloadID">Test</div>
 ';
         return $b;
     }
@@ -534,7 +535,7 @@ class tourn {
             $buf .= "\$this->addPool();\n";
             foreach($pool->teams as $t => $team){
                 $pn = $p+1;
-                $buf .= "\$this->addTeam($pn,'$team->name');\n";
+                $buf .= "\$this->addTeam($pn,\"$team->name\");\n";
             }
             foreach($pool->layout as $m => $match){
                 for($g=0;$g<$match['numGames'];$g++){

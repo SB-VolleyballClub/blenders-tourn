@@ -21,6 +21,14 @@ td {
 form {
     margin-bottom: 0px;
 }
+div#reloadID {
+    display: inline-block;
+    background-color: #dfd;
+    border: 1px solid blue;
+    margin-left: 5px;
+    padding: 3px;
+    border-radius: 6px;    
+}
 div#msg {
     display: inline-block;
     background-color: #dfd;
