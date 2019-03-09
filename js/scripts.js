@@ -11,7 +11,7 @@ function setScore(elementid){
 
     //var target = event.target || event.srcElement;
     //var urlstr = 'index.php?mode=setScore&elementid='+elementid+'&pool='+pool+'&match='+match+'&team='+team+'&game='+game+'&score='+value+'&norender';
-    var urlstr = 'index.php?mode=setScore&elementid='+elementid+'&score='+value+'&norender';
+    var urlstr = '?mode=setScore&elementid='+elementid+'&score='+value+'&norender';
     console.log(urlstr);
 
     var xhttp = new XMLHttpRequest();
@@ -37,7 +37,7 @@ function setTeamName(element,elementid,poolid,teamid){
     //console.log('AJAX setTeamName(' + teamid + ',' + poolid + ',' + value + ',' + elementid + ',' + id + ')');
 
     //var target = event.target || event.srcElement;
-    var urlstr = 'index.php?mode=setTeamName&team='+teamid+'&pool='+poolid+'&name='+value+'&norender';
+    var urlstr = '?mode=setTeamName&team='+teamid+'&pool='+poolid+'&name='+value+'&norender';
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
