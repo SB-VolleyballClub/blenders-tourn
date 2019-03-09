@@ -22,7 +22,12 @@ form {
     margin-bottom: 0px;
 }
 div#msg {
-    background-color: green;
+    display: inline-block;
+    background-color: #dfd;
+    border: 1px solid blue;
+    margin-left: 5px;
+    padding: 3px;
+    border-radius: 6px;
 }
 .poolgrid-container {
     display: inline;

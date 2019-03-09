@@ -364,11 +364,11 @@ class tourn {
     <meta name="description" content="Blenders Tournament">
     <meta name="author" content="Aaron Martin">
 
-    <link rel="stylesheet" href="./css/styles.css?v=1.1">
+    <link rel="stylesheet" href="./css/styles.css?v=1.3">
 </head>
 <body>
     <script src="js/scripts.js"></script>
-    <div id="msg"></div>
+    <div id="msg">Status Message</div>
     <div id="content-wrapper">
 ';
         return $b;
