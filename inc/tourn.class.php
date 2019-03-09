@@ -416,6 +416,7 @@ class tourn {
     }
     function render_data_nav(){
         return '
+        <a href="?mode=example_20190309" class="wide-button">2019-03-09</a>
         <a href="?mode=testData" class="wide-button">Load Example</a>
         <a href="?mode=demoData" class="wide-button">Load Demo</a>
         <a href="?mode=export" class="add-pool-button">Export</a>
@@ -460,6 +461,9 @@ class tourn {
             }
             if ($mode == 'testData'){
                 $this->loadTestData();
+            }
+            if ($mode == 'example_20190309'){
+                $this->example_20190309();
             }
             if ($mode == 'demoData'){
                 $this->loadDemoData();
@@ -665,6 +669,124 @@ class tourn {
         $this->setScoreFromElem('p2m2g1t0',16);
         $this->setScoreFromElem('p2m2g1t1',25);
         $this->__wakeup();
+    }
+    function example_20190309(){
+        $this->addPool();
+        $this->addTeam(1,'Pineapple Diggers');
+        $this->addTeam(1,'MSA Academy Red');
+        $this->addTeam(1,'Anacapa 7th');
+        $this->addTeam(1,"Ocean's Elite - Black");
+        $this->setScoreFromElem('p0m0g0t0',0);
+        $this->setScoreFromElem('p0m0g0t1',0);
+        $this->setScoreFromElem('p0m0g1t0',0);
+        $this->setScoreFromElem('p0m0g1t1',0);
+        $this->setScoreFromElem('p0m1g0t0',0);
+        $this->setScoreFromElem('p0m1g0t1',0);
+        $this->setScoreFromElem('p0m1g1t0',0);
+        $this->setScoreFromElem('p0m1g1t1',0);
+        $this->setScoreFromElem('p0m2g0t0',0);
+        $this->setScoreFromElem('p0m2g0t1',0);
+        $this->setScoreFromElem('p0m2g1t0',0);
+        $this->setScoreFromElem('p0m2g1t1',0);
+        $this->setScoreFromElem('p0m3g0t0',0);
+        $this->setScoreFromElem('p0m3g0t1',0);
+        $this->setScoreFromElem('p0m3g1t0',0);
+        $this->setScoreFromElem('p0m3g1t1',0);
+        $this->setScoreFromElem('p0m4g0t0',0);
+        $this->setScoreFromElem('p0m4g0t1',0);
+        $this->setScoreFromElem('p0m4g1t0',0);
+        $this->setScoreFromElem('p0m4g1t1',0);
+        $this->setScoreFromElem('p0m5g0t0',0);
+        $this->setScoreFromElem('p0m5g0t1',0);
+        $this->setScoreFromElem('p0m5g1t0',0);
+        $this->setScoreFromElem('p0m5g1t1',0);
+        $this->addPool();
+        $this->addTeam(2,"Jumpin' Berries");
+        $this->addTeam(2,'Dominating Dates');
+        $this->addTeam(2,'La Purisma 14- Ferren');
+        $this->addTeam(2,'Rise - Mike');
+        $this->setScoreFromElem('p1m0g0t0',0);
+        $this->setScoreFromElem('p1m0g0t1',0);
+        $this->setScoreFromElem('p1m0g1t0',0);
+        $this->setScoreFromElem('p1m0g1t1',0);
+        $this->setScoreFromElem('p1m1g0t0',0);
+        $this->setScoreFromElem('p1m1g0t1',0);
+        $this->setScoreFromElem('p1m1g1t0',0);
+        $this->setScoreFromElem('p1m1g1t1',0);
+        $this->setScoreFromElem('p1m2g0t0',0);
+        $this->setScoreFromElem('p1m2g0t1',0);
+        $this->setScoreFromElem('p1m2g1t0',0);
+        $this->setScoreFromElem('p1m2g1t1',0);
+        $this->setScoreFromElem('p1m3g0t0',0);
+        $this->setScoreFromElem('p1m3g0t1',0);
+        $this->setScoreFromElem('p1m3g1t0',0);
+        $this->setScoreFromElem('p1m3g1t1',0);
+        $this->setScoreFromElem('p1m4g0t0',0);
+        $this->setScoreFromElem('p1m4g0t1',0);
+        $this->setScoreFromElem('p1m4g1t0',0);
+        $this->setScoreFromElem('p1m4g1t1',0);
+        $this->setScoreFromElem('p1m5g0t0',0);
+        $this->setScoreFromElem('p1m5g0t1',0);
+        $this->setScoreFromElem('p1m5g1t0',0);
+        $this->setScoreFromElem('p1m5g1t1',0);
+        $this->addPool();
+        $this->addTeam(3,'Strawberry Spikers');
+        $this->addTeam(3,'La Purisma 14-Brittany');
+        $this->addTeam(3,'Pomegranate Pounders');
+        $this->addTeam(3,'Rise - Mandy');
+        $this->setScoreFromElem('p2m0g0t0',0);
+        $this->setScoreFromElem('p2m0g0t1',0);
+        $this->setScoreFromElem('p2m0g1t0',0);
+        $this->setScoreFromElem('p2m0g1t1',0);
+        $this->setScoreFromElem('p2m1g0t0',0);
+        $this->setScoreFromElem('p2m1g0t1',0);
+        $this->setScoreFromElem('p2m1g1t0',0);
+        $this->setScoreFromElem('p2m1g1t1',0);
+        $this->setScoreFromElem('p2m2g0t0',0);
+        $this->setScoreFromElem('p2m2g0t1',0);
+        $this->setScoreFromElem('p2m2g1t0',0);
+        $this->setScoreFromElem('p2m2g1t1',0);
+        $this->setScoreFromElem('p2m3g0t0',0);
+        $this->setScoreFromElem('p2m3g0t1',0);
+        $this->setScoreFromElem('p2m3g1t0',0);
+        $this->setScoreFromElem('p2m3g1t1',0);
+        $this->setScoreFromElem('p2m4g0t0',0);
+        $this->setScoreFromElem('p2m4g0t1',0);
+        $this->setScoreFromElem('p2m4g1t0',0);
+        $this->setScoreFromElem('p2m4g1t1',0);
+        $this->setScoreFromElem('p2m5g0t0',0);
+        $this->setScoreFromElem('p2m5g0t1',0);
+        $this->setScoreFromElem('p2m5g1t0',0);
+        $this->setScoreFromElem('p2m5g1t1',0);
+        $this->addPool();
+        $this->addTeam(4,'Tropical Fuzz Fighters');
+        $this->addTeam(4,'Peach Passers');
+        $this->addTeam(4,'Santa Ynez Club');
+        $this->addTeam(4,"Ocean's Elite - Blue");
+        $this->setScoreFromElem('p3m0g0t0',0);
+        $this->setScoreFromElem('p3m0g0t1',0);
+        $this->setScoreFromElem('p3m0g1t0',0);
+        $this->setScoreFromElem('p3m0g1t1',0);
+        $this->setScoreFromElem('p3m1g0t0',0);
+        $this->setScoreFromElem('p3m1g0t1',0);
+        $this->setScoreFromElem('p3m1g1t0',0);
+        $this->setScoreFromElem('p3m1g1t1',0);
+        $this->setScoreFromElem('p3m2g0t0',0);
+        $this->setScoreFromElem('p3m2g0t1',0);
+        $this->setScoreFromElem('p3m2g1t0',0);
+        $this->setScoreFromElem('p3m2g1t1',0);
+        $this->setScoreFromElem('p3m3g0t0',0);
+        $this->setScoreFromElem('p3m3g0t1',0);
+        $this->setScoreFromElem('p3m3g1t0',0);
+        $this->setScoreFromElem('p3m3g1t1',0);
+        $this->setScoreFromElem('p3m4g0t0',0);
+        $this->setScoreFromElem('p3m4g0t1',0);
+        $this->setScoreFromElem('p3m4g1t0',0);
+        $this->setScoreFromElem('p3m4g1t1',0);
+        $this->setScoreFromElem('p3m5g0t0',0);
+        $this->setScoreFromElem('p3m5g0t1',0);
+        $this->setScoreFromElem('p3m5g1t0',0);
+        $this->setScoreFromElem('p3m5g1t1',0);
     }
     function setTeamName($poolnum,$teamnum,$name){
         print "tourn::setTeamName($poolnum,$teamnum,$name)<br>";
